@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=bbb4b1bdc2c3b6743da3c39d03249095"
 DEPENDS += "u-boot-mkimage-native systemd"
 
 PACKAGECONFIG ?= " \
-    sdl \
     xsm \
     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
     ${@bb.utils.contains('XEN_TARGET_ARCH', 'x86_64', 'hvm', '', d)} \
