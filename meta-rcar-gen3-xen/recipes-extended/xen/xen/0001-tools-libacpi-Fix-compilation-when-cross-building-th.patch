@@ -1,0 +1,113 @@
+From 7d7f88bc8d5d1b253a1c81de6b09e7fabee44fa5 Mon Sep 17 00:00:00 2001
+From: Julien Grall <julien.grall@arm.com>
+Date: Mon, 28 Nov 2016 13:13:36 +0000
+Subject: [PATCH] tools/libacpi: Fix compilation when cross building the tools
+
+The tools (such as mk_dsdt) can be cross-built when it may not be
+desirable to build them on the target.
+
+The commit c4ac1077 "libxl/arm: Generate static ACPI DSDT table"
+introduced support of ARM64 in mk_dsdt but also break cross-building
+tools because the ACPI tables are not correct.
+
+While mk_dsdt should generate ACPI table for the target architecture, it
+currently generates the one for the host. This is because the source
+code contains reference to the host architecture (__aarch64__,
+__x86_64__, __i386__) when it should be the target architecture.
+
+Replace all __aarch64__, __x86_64__, __i386__ by the corresponding
+CONFIG_*.
+
+Also expose the CONFIG_* to the source code as the currently only
+exposed to the Makefile.
+
+Reported-by: Andrii Anisov <andrii.anisov@gmail.com>
+Suggested-by: Wei Liu <wei.liu2@citrix.com>
+Signed-off-by: Julien Grall <julien.grall@arm.com>
+Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+ tools/libacpi/Makefile  |  5 ++++-
+ tools/libacpi/mk_dsdt.c | 14 +++++++-------
+ 2 files changed, 11 insertions(+), 8 deletions(-)
+
+diff --git a/tools/libacpi/Makefile b/tools/libacpi/Makefile
+index ccc32c9..6d8445d 100644
+--- a/tools/libacpi/Makefile
++++ b/tools/libacpi/Makefile
+@@ -27,6 +27,9 @@ DSDT_FILES ?= $(C_SRC-y)
+ C_SRC = $(addprefix $(ACPI_BUILD_DIR)/, $(DSDT_FILES))
+ H_SRC = $(addprefix $(ACPI_BUILD_DIR)/, ssdt_s3.h ssdt_s4.h ssdt_pm.h ssdt_tpm.h)
+ 
++MKDSDT_CFLAGS-$(CONFIG_ARM_64) = -DCONFIG_ARM_64
++MKDSDT_CFLAGS-$(CONFIG_X86) = -DCONFIG_X86
++
+ # Suffix for temporary files.
+ #
+ # We will also use this suffix to workaround a bug in older iasl
+@@ -44,7 +47,7 @@ $(H_SRC): $(ACPI_BUILD_DIR)/%.h: %.asl iasl
+ 	rm -f $(addprefix $(ACPI_BUILD_DIR)/, $*.aml $*.hex)
+  
+ $(MK_DSDT): mk_dsdt.c
+-	$(HOSTCC) $(HOSTCFLAGS) $(CFLAGS_xeninclude) -D__XEN_TOOLS__ -o $@ mk_dsdt.c
++	$(HOSTCC) $(HOSTCFLAGS) $(MKDSDT_CFLAGS-y) $(CFLAGS_xeninclude) -D__XEN_TOOLS__ -o $@ mk_dsdt.c
+ 
+ $(ACPI_BUILD_DIR)/dsdt_anycpu_qemu_xen.asl: dsdt.asl dsdt_acpi_info.asl $(MK_DSDT)
+ 	# Remove last bracket
+diff --git a/tools/libacpi/mk_dsdt.c b/tools/libacpi/mk_dsdt.c
+index 16320a9..760d81b 100644
+--- a/tools/libacpi/mk_dsdt.c
++++ b/tools/libacpi/mk_dsdt.c
+@@ -17,9 +17,9 @@
+ #include <getopt.h>
+ #include <stdlib.h>
+ #include <stdbool.h>
+-#if defined(__i386__) || defined(__x86_64__)
++#if defined(CONFIG_X86)
+ #include <xen/hvm/hvm_info_table.h>
+-#elif defined(__aarch64__)
++#elif defined(CONFIG_ARM_64)
+ #include <xen/arch-arm.h>
+ #endif
+ 
+@@ -111,9 +111,9 @@ int main(int argc, char **argv)
+     unsigned int slot, dev, intx, link, cpu, max_cpus;
+     dm_version dm_version = QEMU_XEN_TRADITIONAL;
+ 
+-#if defined(__i386__) || defined(__x86_64__)
++#if defined(CONFIG_X86)
+     max_cpus = HVM_MAX_VCPUS;
+-#elif defined(__aarch64__)
++#elif defined(CONFIG_ARM_64)
+     max_cpus = GUEST_MAX_VCPUS;
+ #endif
+ 
+@@ -169,7 +169,7 @@ int main(int argc, char **argv)
+     /**** Processor start ****/
+     push_block("Scope", "\\_SB");
+ 
+-#if defined(__i386__) || defined(__x86_64__)
++#ifdef CONFIG_X86
+     /* MADT checksum */
+     stmt("OperationRegion", "MSUM, SystemMemory, \\_SB.MSUA, 1");
+     push_block("Field", "MSUM, ByteAcc, NoLock, Preserve");
+@@ -193,7 +193,7 @@ int main(int argc, char **argv)
+         stmt("Name", "_HID, \"ACPI0007\"");
+ 
+         stmt("Name", "_UID, %d", cpu);
+-#if defined(__aarch64__)
++#ifdef CONFIG_ARM_64
+         pop_block();
+         continue;
+ #endif
+@@ -235,7 +235,7 @@ int main(int argc, char **argv)
+         pop_block();
+     }
+ 
+-#if defined(__aarch64__)
++#ifdef CONFIG_ARM_64
+     pop_block();
+     /**** Processor end ****/
+     pop_block();
+-- 
+2.7.4
+

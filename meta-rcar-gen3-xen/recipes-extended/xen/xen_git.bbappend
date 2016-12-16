@@ -25,7 +25,7 @@ SRC_URI += "\
     file://0003-Enable-XSM.patch \ 
     file://0004-HACK-Fix-compilation-issues.patch \
     file://0005-Hack.patch \
-    file://0006-libxl-Make-ACPI-support-build-for-ARM64-configurable.patch \
+    file://0001-tools-libacpi-Fix-compilation-when-cross-building-th.patch \
     "
 
 EXTRA_OEMAKE += " CONFIG_HAS_SCIF=y CONFIG_DEBUG=y CONFIG_EARLY_PRINTK=salvator CONFIG_QEMU_XEN=n"
