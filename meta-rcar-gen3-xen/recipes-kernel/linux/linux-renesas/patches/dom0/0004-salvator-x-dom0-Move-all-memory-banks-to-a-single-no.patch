@@ -1,7 +1,7 @@
-From 997fd38ec827eda4449f8716723bf772f0ff140d Mon Sep 17 00:00:00 2001
+From a4408abd1a0724786c1b47730a87a70e16d3d450 Mon Sep 17 00:00:00 2001
 From: Andrii Anisov <andrii.anisov@gmail.com>
 Date: Mon, 21 Nov 2016 19:01:55 +0200
-Subject: [PATCH 4/4] salvator-x:dom0: Move all memory banks to a single node
+Subject: [PATCH 4/7] salvator-x:dom0: Move all memory banks to a single node
 
 Due to a weird "fdt memory fixup" in u-boot introduce a single memory
 node.

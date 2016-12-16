@@ -1,7 +1,7 @@
-From 429274c25f2a3c90c3b67f06a375f2d7ae4df131 Mon Sep 17 00:00:00 2001
+From ec87bbac4c0675c0ac3e40dd1c56b95fd42eafe1 Mon Sep 17 00:00:00 2001
 From: Iurii Konovalenko <iurii.konovalenko@globallogic.com>
 Date: Thu, 9 Jun 2016 14:20:58 +0300
-Subject: [PATCH 1/4] clk:shmobile: Hide clock for SCIF2
+Subject: [PATCH 1/7] clk:shmobile: Hide clock for SCIF2
 
 On Renesas Salvaotor board with Xen SCIF2 is provided to hypervisor, so
 kernel should not manage SCIF2 clock.
