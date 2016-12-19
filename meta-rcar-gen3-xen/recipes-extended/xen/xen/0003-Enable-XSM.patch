@@ -12,8 +12,9 @@ diff --git a/xen/arch/arm/configs/arm64_defconfig b/xen/arch/arm/configs/arm64_d
 index e69de29..d91c6c3 100644
 --- a/xen/arch/arm/configs/arm64_defconfig
 +++ b/xen/arch/arm/configs/arm64_defconfig
-@@ -0,0 +1 @@
+@@ -0,0 +1,2 @@
 +CONFIG_XSM=y
++CONFIG_DEBUG=y
 -- 
 2.7.4
 
