@@ -28,7 +28,7 @@ UBOOT_MACHINE_r8a7795 = "r8a7795_salvator-x_defconfig"
 UBOOT_MACHINE_r8a7796 = "r8a7796_salvator-x_defconfig"
 
 # libdrm
-PREFERRED_VERSION_libdrm = "2.4.65"
+PREFERRED_VERSION_libdrm = "2.4.68"
 
 #xen
 PREFERRED_VERSION_xen = "4.8.0+git%"
