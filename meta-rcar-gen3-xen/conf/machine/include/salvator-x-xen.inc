@@ -9,7 +9,7 @@ require conf/machine/include/${SOC_FAMILY}.inc
 MACHINE_FEATURES = ""
 
 KERNEL_IMAGETYPE = "Image"
-IMAGE_FSTYPES = "tar.bz2 ext4 cpio.gz"
+IMAGE_FSTYPES = "tar.bz2"
 
 SERIAL_CONSOLE = "115200 ttySC0"
 
