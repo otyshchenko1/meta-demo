@@ -17,7 +17,7 @@ SERIAL_CONSOLE = "115200 ttySC0"
 PREFERRED_PROVIDER_virtual/kernel = "linux-renesas"
 
 # Configuration for ARM Trusted Firmware
-EXTRA_IMAGEDEPENDS += " arm-trusted-firmware optee-os"
+EXTRA_IMAGEDEPENDS += "arm-trusted-firmware"
 
 # u-boot
 PREFERRED_VERSION_u-boot = "v2015.04%"
