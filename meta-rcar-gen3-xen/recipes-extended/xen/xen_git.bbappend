@@ -11,23 +11,15 @@ PACKAGECONFIG ?= " \
     "
 
 XEN_REL="4.8"
+
 SRC_URI = " \
-    git://xenbits.xen.org/xen.git;branch=master \
+    git://github.com/xen-troops/xen.git;protocol=http;branch=4.8-demo \
     "
-SRCREV = "58bd0c7985890e0292212f94a56235228a3445c3"
+SRCREV = "4.8-demo"
 
-FLASK_POLICY_FILE="xenpolicy-4.8.0-rc"
+FLASK_POLICY_FILE="xenpolicy-4.8.0"
 
-SRC_URI += "\
-    file://0001-arm64-renesas-Introduce-early-console-for-Salvator-X.patch \
-    file://0002-char-scif-Add-Renesas-Salvator-X-board-support.patch \
-    file://0003-Enable-XSM.patch \ 
-    file://0004-HACK-Fix-compilation-issues.patch \
-    file://0005-Hack.patch \
-    file://0001-tools-libacpi-Fix-compilation-when-cross-building-th.patch \
-    "
-
-EXTRA_OEMAKE += " CONFIG_HAS_SCIF=y CONFIG_DEBUG=y CONFIG_EARLY_PRINTK=salvator CONFIG_QEMU_XEN=n"
+EXTRA_OEMAKE += " CONFIG_HAS_SCIF=y CONFIG_QEMU_XEN=n"
 
 PACKAGES += "\
     ${PN}-livepatch \
