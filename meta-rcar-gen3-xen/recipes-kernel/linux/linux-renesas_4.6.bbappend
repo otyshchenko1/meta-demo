@@ -11,6 +11,7 @@ SRC_URI_append_salvator-x-xen-dom0 = "  file://patches/dom0/0001-clk-shmobile-Hi
 					file://patches/dom0/0005-swiotlb-xen-implement-xen_swiotlb_dma_mmap-callback.patch \
 					file://patches/dom0/0006-get-back-the-full-dts-for-a-reach-dom0.patch \
 					file://patches/dom0/0007-drm-debug-stuff.patch \
+					file://patches/dom0/0008-make-printk-more-suitable-for-heavy-debugging.patch \
 					file://xen_dom0.cfg \
 "
 

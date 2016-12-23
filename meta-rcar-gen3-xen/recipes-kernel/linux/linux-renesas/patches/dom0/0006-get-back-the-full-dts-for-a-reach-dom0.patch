@@ -1,7 +1,7 @@
-From 56ea13344423be61fb0b385baac4cf896e7e67be Mon Sep 17 00:00:00 2001
+From 3eba59655fb9a4811a8d1c9e0b9ee25638311ded Mon Sep 17 00:00:00 2001
 From: Andrii Anisov <andrii.anisov@gmail.com>
 Date: Thu, 1 Dec 2016 19:45:08 +0200
-Subject: [PATCH 6/7] get back the full dts for a reach dom0.
+Subject: [PATCH 6/8] get back the full dts for a reach dom0.
 
 ---
  .../boot/dts/renesas/r8a7795-salvator-x-dom0.dts   | 871 +++++++++++++++++++--

@@ -1,7 +1,7 @@
-From 7ab8cbf495639d12d34babd50c05308d7d76eeec Mon Sep 17 00:00:00 2001
+From 06085017c66b8a2e330c35c2530fac11eb83f2f9 Mon Sep 17 00:00:00 2001
 From: Andrii Anisov <andrii.anisov@gmail.com>
 Date: Fri, 2 Dec 2016 16:52:01 +0200
-Subject: [PATCH 7/7] drm debug stuff
+Subject: [PATCH 7/8] drm debug stuff
 
 ---
  arch/arm64/mm/fault.c                | 2 ++
