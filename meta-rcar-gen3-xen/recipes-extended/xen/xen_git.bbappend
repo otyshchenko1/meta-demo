@@ -13,7 +13,7 @@ PACKAGECONFIG ?= " \
 XEN_REL="4.8"
 
 SRC_URI = " \
-    git://github.com/xen-troops/xen.git;protocol=http;branch=4.8-demo \
+    git://github.com/aanisov/xen.git;protocol=http;branch=domd-wip \
     "
 SRCREV = "${AUTOREV}"
 
