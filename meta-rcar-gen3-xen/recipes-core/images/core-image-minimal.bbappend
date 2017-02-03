@@ -2,6 +2,8 @@
 IMAGE_INSTALL_append = " \
     xen-base \
     xen-flask \
+    guests \
+    guest-images \
 "
 
 # Do not support secure environment
