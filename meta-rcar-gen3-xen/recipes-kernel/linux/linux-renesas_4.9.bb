@@ -6,7 +6,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}/${MACHINE}:"
 COMPATIBLE_MACHINE = "(salvator-x|h3ulcb|m3ulcb)"
 
 RENESAS_BSP_URL = "git://github.com/aanisov/linux.git"
-BRANCH = "v4.9/rcar-3.5.1-xt"
+BRANCH = "v4.9/rcar-3.5.1-xt-domd-wip"
 SRCREV = "${AUTOREV}"
 
 SRC_URI = "${RENESAS_BSP_URL};protocol=git;nocheckout=1;branch=${BRANCH}"
