@@ -13,7 +13,7 @@ PACKAGECONFIG ?= " \
 XEN_REL="4.8"
 
 SRC_URI = " \
-    git://github.com/aanisov/xen.git;protocol=http;branch=domd-wip \
+    git://github.com/otyshchenko1/xen.git;protocol=git;branch=ipmmu_rebased_ready  \
     "
 SRCREV = "${AUTOREV}"
 
