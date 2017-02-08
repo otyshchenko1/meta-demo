@@ -23,8 +23,8 @@ SRC_URI_append_salvator-x = ""
 
 do_install_append() {
     install -d ${D}${base_prefix}/xen
-    install -m 0644 ${B}/arch/${ARCH}/boot/dts/renesas/domd.dtb ${D}${base_prefix}/xen/domd.dtb
-    install -m 0644 ${KERNEL_OUTPUT} ${D}${base_prefix}/xen/domd.img
+    install -m 0644 ${B}/arch/${ARCH}/boot/dts/renesas/domd-0.dtb ${D}${base_prefix}/xen/domd-0.dtb
+    install -m 0644 ${B}/arch/${ARCH}/boot/dts/renesas/domd-3.dtb ${D}${base_prefix}/xen/domd-3.dtb
 }
 
 PACKAGES += "guest-images"
